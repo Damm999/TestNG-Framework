@@ -26,9 +26,11 @@ public class MenuPage {
 		this.ex = ex;
 		PageFactory.initElements(this.driver, this);
 	}
-	
+
 	// By elements
-	By menuItems= By.cssSelector("li[class='top-up-item']");
+	public By menuItems(String itemName) {
+		return By.xpath("//*[text() = \" " + itemName + " \"]//parent::div[1]/parent::div[@class='detail--wrapper']");
+	}
 
 	@FindBy(css = "[class='honest-mt-10 no-address-container'] a")
 	public WebElement continueWithoutAnAddressLink;
@@ -42,19 +44,21 @@ public class MenuPage {
 	@FindBy(css = "[class='btn--honest blattgold--form-banner-submit']")
 	public WebElement submitAddressButton;
 
-	@FindBy(css = "#topup-modal--close")
-	public WebElement popUpCloseButton;
+	@FindBy(css = "[class='btn is--primary is--icon-right no--float button']")
+	public WebElement addItemsToCartButton;
 
 	@FindBy(id = "jsLoadMethod")
 	public WebElement jsLoader;
-	
-	public WebElement selectMenuItem(String name) {
-		return driver.findElement(By.xpath("//input[name='" + name + "']"));
-	}
+
+	@FindBy(css = "[class='alert is--success is--rounded']")
+	public WebElement addSucessLabel;
+
+	By extraItems = By.cssSelector("[class='label-text']");
 
 	public WebElement menuNameLabel(String menuName) {
 		// \"Mamacita's Burrito Menu\"
-		return driver.findElement(By.xpath("//button[@class=\"buybox--button--image-overlay\"]//preceding::form//following-sibling::a[@title = \""+menuName+"\"]"));
+		return driver.findElement(By.xpath("//*[text()=\" " + menuName
+				+ " \"]/parent::a/parent::form/following-sibling::div[3]/child::form/child::button"));
 	}
 
 	public void verifyMenuPage() throws IOException {
@@ -79,26 +83,31 @@ public class MenuPage {
 	}
 
 	public void selectMenu(String menuName) throws IOException {
-		for(int i=0; i<5; i++)
+		for (int i = 0; i < 5; i++)
 			sel.scrollDown();
 		sel.clickElementJS(menuNameLabel(menuName));
 	}
 
-	public void selectMenuItems(ArrayList<String> items, ArrayList<String> extras) throws IOException {
-		List<WebElement> list = sel.getListOfElements(menuItems);
+	public void selectMenuItems(String items, ArrayList<String> extras) throws IOException {
 
-		for (String name : items) {
-			sel.scrollElementIntoView(selectMenuItem(name));
-			sel.clickElement(selectMenuItem(name));
-		}
+		sel.waitForElementToBeVisible(driver.findElement(menuItems(items)));
+		sel.clickElement(menuItems(items));
 
+		List<WebElement> list = sel.getListOfElements(extraItems);
 		for (WebElement item : list) {
 			sel.scrollElementIntoView(item);
 			if (extras.contains(item.getText()))
 				sel.clickElement(item);
 		}
 
-		sel.clickElement(popUpCloseButton);
+		sel.clickElement(addItemsToCartButton);
+
+		sel.waitForElementToBeVisible(addSucessLabel);
+
+		if (sel.isElementPresent(addSucessLabel))
+			ex.logTestStepWithScreenshot(driver, Status.PASS, "Items added Suceessfully");
+		else
+			ex.logTestStepWithScreenshot(driver, Status.FAIL, "Items are not added Suceessfully");
 	}
 
 }

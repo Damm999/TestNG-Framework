@@ -60,19 +60,19 @@ public class AppTest2 {
 	@Test
 	public void TC_001() throws Exception {
 		ex.createTestCase("ClubKitchen TC001");
-		ex.logTestSteps(Status.INFO, "Sucessfully opened the websit...");
+		ex.logTestSteps(Status.INFO, "Sucessfully opened the website.. and automation is started...");
 		hp.navigateToMenusPage();
 
-		String streetAddress = "Seidengasse 55, 1070 Wien, Austria";
+		String streetAddress = "Seidengasse 44, 1070 Wien, Austria";
 		mp.verifyMenuPage();
 		mp.enterStreetAddress(streetAddress);
-		String menuName = "Mamacita's Burrito Menu";
+		String menuName = "Avocado Crush Burrito";
 		mp.selectMenu(menuName);
-		ArrayList<String> items = new ArrayList<String>();
-		items.add("bundle-product-798");
+		String items = "HOT: Mango & Chili Salsa";
 		ArrayList<String> extras = new ArrayList<String>();
-		extras.add("Tomaten Avocado Salsa");
+		extras.add("Extra Tomaten-Paprika Mix");
 		extras.add("Extra Cheeeese");
+		extras.add("Nachos mit Creme Fraiche");
 		mp.selectMenuItems(items, extras);
 		Assert.assertTrue(true);
 	}

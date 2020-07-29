@@ -68,8 +68,7 @@ public class AppTest {
 		mp.enterStreetAddress(streetAddress);
 		String menuName = "Mamacita's Burrito Menu";
 		mp.selectMenu(menuName);
-		ArrayList<String> items = new ArrayList<String>();
-		items.add("bundle-product-798");
+		String items = "Wicked Classic Burrito";
 		ArrayList<String> extras = new ArrayList<String>();
 		extras.add("Tomaten Avocado Salsa");
 		extras.add("Extra Cheeeese");
