@@ -1,0 +1,106 @@
+package TestNgProject.Automatio_Framework;
+
+import java.io.IOException;
+import java.lang.reflect.Method;
+import java.util.ArrayList;
+
+import org.openqa.selenium.WebDriver;
+import org.testng.Assert;
+import org.testng.ITestResult;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Test;
+
+import com.aventstack.extentreports.Status;
+import com.driver.Driver;
+import com.pageobjects.HomePage;
+import com.pageobjects.MenuPage;
+import com.reporting.ExtentReporting;
+import com.support.Browsers;
+import com.utils.JsonUtils;
+import com.utils.SeleniumUtils;
+
+/**
+ * Unit test for simple App.
+ */
+public class AppTest {
+
+	WebDriver driver;
+	ExtentReporting ex;
+	JsonUtils jsonData;
+	SeleniumUtils sel;
+	Driver d;
+
+	HomePage hp;
+	MenuPage mp;
+
+	@BeforeTest
+	public void beforeTest() {
+		jsonData = new JsonUtils("AppTest");
+		d = new Driver();
+		driver = d.getDriver();
+		ex = new ExtentReporting("AppTest");
+	}
+
+	@BeforeMethod
+	public void beforeMethod() {
+		driver = d.getWebdriver(Browsers.Chrome);
+
+		sel = new SeleniumUtils(driver, ex);
+		// Page Objects
+		hp = new HomePage(driver, sel, ex);
+		mp = new MenuPage(driver, sel, ex);
+
+		driver.manage().window().maximize();
+		driver.get(jsonData.getConfigData("url"));
+	}
+
+	@Test
+	public void TC_001() throws Exception {
+		ex.createTestCase("ClubKitchen TC001");
+		ex.logTestSteps(Status.INFO, "Sucessfully opened the website");
+		hp.navigateToMenusPage();
+
+		String streetAddress = "Seidengasse 44, 1070 Wien, Austria";
+		mp.verifyMenuPage();
+		mp.enterStreetAddress(streetAddress);
+		String menuName = "Mamacita's Burrito Menu";
+		mp.selectMenu(menuName);
+		ArrayList<String> items = new ArrayList<String>();
+		items.add("bundle-product-798");
+		ArrayList<String> extras = new ArrayList<String>();
+		extras.add("Tomaten Avocado Salsa");
+		extras.add("Extra Cheeeese");
+		mp.selectMenuItems(items, extras);
+		Assert.assertTrue(true);
+	}
+
+	@Test
+	public void TC_002() throws IOException {
+		ex.createTestCase("ClubKitchen TC002");
+		ex.logTestSteps(Status.PASS, "Sucessfully opened 2nd website");
+		hp.clickOnLogin();
+		Assert.assertTrue(true);
+		ex.logTestStepWithScreenshot(driver, Status.WARNING, "Test Excersie");
+	}
+
+	@AfterMethod
+	public void endDriver(ITestResult res, Method m) throws IOException {
+		
+		if(ITestResult.FAILURE == res.getStatus())
+			ex.logTestStepWithScreenshot(driver, Status.FAIL, m.getName()+" case failed due to:\n"+ res.getThrowable());
+		else if(ITestResult.SKIP == res.getStatus())
+			ex.logTestStepWithScreenshot(driver, Status.SKIP, m.getName()+" case Skipped due to: \n"+ res.getThrowable());
+		ex.closeTest();
+		driver.close();
+	}
+
+	@AfterTest
+	public void afterTest() throws IOException {
+		
+		if(driver!= null)
+			driver.quit();
+	}
+}

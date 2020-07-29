@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" guice-stage="DEVELOPMENT" name="Failed suite [Club_Kitchen]" parallel="methods">
+  <test thread-count="2" name="Add to Cart Test(failed)" parallel="methods">
+    <classes>
+      <class name="TestNgProject.Automatio_Framework.AppTest">
+        <methods>
+          <include name="beforeMethod"/>
+          <include name="TC_001"/>
+          <include name="endDriver"/>
+          <include name="afterTest"/>
+          <include name="beforeTest"/>
+        </methods>
+      </class> <!-- TestNgProject.Automatio_Framework.AppTest -->
+    </classes>
+  </test> <!-- Add to Cart Test(failed) -->
+</suite> <!-- Failed suite [Club_Kitchen] -->
