@@ -3,8 +3,8 @@
 <suite name="Club_Kitchen" parallel="classes" thread-count="2">  
   <test name="Add to Cart Test">  
     <classes>  
-      <class name="TestNgProject.Automatio_Framework.AppTest"/>
-      <class name="TestNgProject.Automatio_Framework.AppTest2"/>  
+      <class name="com.testClasses.AppTest"/>
+      <class name="com.testClasses.AppTest2"/>  
     </classes>  
   </test> <!-- Test -->  
 </suite> <!-- Suite -->  
