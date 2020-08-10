@@ -23,7 +23,6 @@ import com.utils.FileUitls;
 import com.utils.LoggersUtils;
 
 public class ExtentReporting {
-	
 
 	ExtentReports extent;
 	ExtentTest test;
@@ -32,15 +31,21 @@ public class ExtentReporting {
 		createExtentReports(name);
 	}
 
-	public void createExtentReports(String name) throws ClassNotFoundException {
+	public void createExtentReports(String name) {
 		extent = new ExtentReports();
-		LoggersUtils.getInstance(Class.forName("TestNgProject.Automatio_Framework."+name));
+		try {
+			LoggersUtils.getInstance(Class.forName("com.testing." + name));
+		} catch (ClassNotFoundException e) {
+			System.err.println("Please check the logger initilization package name for class: " + name
+					+ " in createExtentReports() method.");
+			System.exit(1);
+		}
 
 		String folderName = FileUitls.getFolderPath(name);
 
 		ExtentSparkReporter spark = new ExtentSparkReporter(
 				folderName + "/HTMLReport" + DateUtils.getTimeStamp() + ".html");
-		
+
 		spark.config().enableOfflineMode(true);
 		spark.config().setDocumentTitle("Automation Suite");
 		spark.config().setEncoding("utf-8");
@@ -61,6 +66,7 @@ public class ExtentReporting {
 
 		extent.setSystemInfo("HostName", id.getHostName());
 		extent.setSystemInfo("OS", System.getProperty("os.name"));
+
 	}
 
 	public void createTestCase(String name) {
@@ -73,7 +79,6 @@ public class ExtentReporting {
 		test.assignCategory(category);
 	}
 
-	
 	public void createTestCase(String name, String author, String category, String device) {
 		test = extent.createTest(name);
 		test.assignAuthor(author);

@@ -1,15 +1,17 @@
-package com.testClasses;
+package com.testing;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -21,35 +23,42 @@ import com.pageobjects.MenuPage;
 import com.reporting.ExtentReporting;
 import com.support.Browsers;
 import com.utils.JsonUtils;
+import com.utils.LoggersUtils;
 import com.utils.SeleniumUtils;
 
 /**
  * Unit test for simple App.
  */
-public class AppTest2 {
+public class AppTest {
 
 	WebDriver driver;
 	ExtentReporting ex;
 	JsonUtils jsonData;
 	SeleniumUtils sel;
 	Driver d;
-	String browserName;
-
+	
 	HomePage hp;
 	MenuPage mp;
 
+	@BeforeClass
+	public void beforeClass() {
+		 SimpleDateFormat dateFormat = new SimpleDateFormat("dd-mm-ss");
+		    System.setProperty("current.date.time", dateFormat.format(new Date()));
+	}
+	
 	@BeforeTest
 	public void beforeTest() throws ClassNotFoundException {
-		jsonData = new JsonUtils("AppTest2");
+		jsonData = new JsonUtils("AppTest");
 		d = new Driver();
 		driver = d.getDriver();
-		ex = new ExtentReporting("AppTest2");
+		LoggersUtils.getInstance(AppTest.class);
+		ex = new ExtentReporting("AppTest");
 	}
 
 	@BeforeMethod
 	public void beforeMethod() {
 		driver = d.getWebdriver(Browsers.Chrome);
-		browserName = ((RemoteWebDriver) driver).getCapabilities().getBrowserName().toLowerCase();
+		LoggersUtils.getLog().info("Test input");
 		sel = new SeleniumUtils(driver, ex);
 		// Page Objects
 		hp = new HomePage(driver, sel, ex);
@@ -61,31 +70,31 @@ public class AppTest2 {
 
 	@Test
 	public void TC_001() throws Exception {
-		ex.createTestCase("ClubKitchen TC001", "Kaushik", "Regression", browserName);
-		ex.logTestSteps(Status.INFO, "Sucessfully opened the website.. and automation is started...");
+		ex.createTestCase("ClubKitchen TC001");
+		
+		ex.logTestSteps(Status.INFO, "Sucessfully opened the website");
 		hp.navigateToMenusPage();
 
 		String streetAddress = "Seidengasse 44, 1070 Wien, Austria";
 		mp.verifyMenuPage();
 		mp.enterStreetAddress(streetAddress);
-		String menuName = "Avocado Crush Burrito";
+		String menuName = "Mamacita's Burrito Menu";
 		mp.selectMenu(menuName);
-		String items = "HOT: Mango & Chili Salsa";
+		String items = "Wicked Classic Burrito";
 		ArrayList<String> extras = new ArrayList<String>();
-		extras.add("Extra Tomaten-Paprika Mix");
+		extras.add("Tomaten Avocado Salsa");
 		extras.add("Extra Cheeeese");
-		extras.add("Nachos mit Creme Fraiche");
 		mp.selectMenuItems(items, extras);
 		Assert.assertTrue(true);
 	}
 
 	@Test
 	public void TC_002() throws IOException {
-		ex.createTestCase("ClubKitchen TC002", "Rakesh", "Sanity Suite", browserName);
-		ex.logTestSteps(Status.INFO, "Sucessfully opened 2nd website");
+		ex.createTestCase("ClubKitchen TC002");
+		ex.logTestSteps(Status.PASS, "Sucessfully opened 2nd website");
 		hp.clickOnLogin();
 		Assert.assertTrue(true);
-		ex.logTestStepWithScreenshot(driver, Status.WARNING, "Test Excersie 2");
+		ex.logTestStepWithScreenshot(driver, Status.WARNING, "Test Excersie");
 	}
 
 	@AfterMethod

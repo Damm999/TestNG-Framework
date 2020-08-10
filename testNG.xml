@@ -1,10 +1,10 @@
-<?xml version="1.0" encoding="UTF-8"?>  
-<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">  
-<suite name="Club_Kitchen" parallel="classes" thread-count="2">  
-  <test name="Add to Cart Test">  
-    <classes>  
-      <class name="com.testClasses.AppTest"/>
-      <class name="com.testClasses.AppTest2"/>  
-    </classes>  
-  </test> <!-- Test -->  
-</suite> <!-- Suite -->  
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite thread-count="2" name="Suite" parallel="classes">
+  <test thread-count="2" name="Test" parallel="classes">
+    <classes>
+      <class name="com.testing.AppTest2"/>
+      <class name="com.testing.AppTest"/>
+    </classes>
+  </test> <!-- Test -->
+</suite> <!-- Suite -->
