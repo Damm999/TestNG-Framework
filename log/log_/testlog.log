@@ -1,0 +1,34 @@
+2020-08-06 23:38:22,467 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Test input
+2020-08-06 23:38:27,873 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Sucessfully opened the website
+2020-08-06 23:38:27,873 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Sucessfully opened the website.. and automation is started...
+2020-08-06 23:38:56,432 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: Proxy element for: DefaultElementLocator 'By.cssSelector: [class='btn club-home-button shop-menu-btn']'
+2020-08-06 23:38:56,524 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Element is present: > css selector: [class='honest-mt-10 no-address-container'] a]
+2020-08-06 23:38:56,525 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Menu page is opened.
+2020-08-06 23:38:57,290 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='btn--honest blattgold--form-banner-submit']]
+2020-08-06 23:39:07,977 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: Proxy element for: DefaultElementLocator 'By.cssSelector: [class='btn club-home-button shop-menu-btn']'
+2020-08-06 23:39:08,039 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Element is present: > css selector: [class='honest-mt-10 no-address-container'] a]
+2020-08-06 23:39:08,039 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Menu page is opened.
+2020-08-06 23:39:08,493 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='btn--honest blattgold--form-banner-submit']]
+2020-08-06 23:39:08,702 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > xpath: //*[text()=" Avocado Crush Burrito "]/parent::a/parent::form/following-sibling::div[3]/child::form/child::button]
+2020-08-06 23:39:10,826 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: By.xpath: //*[text() = " HOT: Mango & Chili Salsa "]//parent::div[1]/parent::div[@class='detail--wrapper']
+2020-08-06 23:39:10,848 - TestNgProject.Automatio_Framework.AppTest2 -INFO - 7 elements were found..
+2020-08-06 23:39:11,010 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='label-text']]
+2020-08-06 23:39:11,199 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='label-text']]
+2020-08-06 23:39:11,306 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='label-text']]
+2020-08-06 23:39:11,651 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='btn is--primary is--icon-right no--float button']]
+2020-08-06 23:39:19,766 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > xpath: //*[text()=" Mamacita's Burrito Menu "]/parent::a/parent::form/following-sibling::div[3]/child::form/child::button]
+2020-08-06 23:39:20,753 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Element is present: > css selector: [class='alert is--success is--rounded']]
+2020-08-06 23:39:21,283 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Items added Suceessfully
+2020-08-06 23:39:21,400 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: By.xpath: //*[text() = " Wicked Classic Burrito "]//parent::div[1]/parent::div[@class='detail--wrapper']
+2020-08-06 23:39:21,430 - TestNgProject.Automatio_Framework.AppTest2 -INFO - 7 elements were found..
+2020-08-06 23:39:21,797 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='label-text']]
+2020-08-06 23:39:22,212 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='btn is--primary is--icon-right no--float button']]
+2020-08-06 23:39:30,856 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Sucessfully opened 2nd website
+2020-08-06 23:39:31,075 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='navigation--entry login-logout']]
+2020-08-06 23:39:31,328 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Element is present: > css selector: [class='alert is--success is--rounded']]
+2020-08-06 23:39:31,927 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Items added Suceessfully
+2020-08-06 23:39:35,524 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Test input
+2020-08-06 23:39:36,225 - TestNgProject.Automatio_Framework.AppTest2 -WARN - Test Excersie 2
+2020-08-06 23:39:40,360 - TestNgProject.Automatio_Framework.AppTest2 -INFO - Sucessfully opened 2nd website
+2020-08-06 23:39:40,568 - TestNgProject.Automatio_Framework.AppTest2 -INFO - User was able to click on element: > css selector: [class='navigation--entry login-logout']]
+2020-08-06 23:39:45,098 - TestNgProject.Automatio_Framework.AppTest2 -WARN - Test Excersie

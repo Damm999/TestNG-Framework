@@ -125,7 +125,7 @@ public class SeleniumUtils {
 		try {
 			list = driver.findElements(ele);
 
-			if (list.size() == 0)
+			if (list.isEmpty())
 				ex.logTestSteps(Status.FAIL, "No elements were found.");
 			else
 				ex.logTestSteps(Status.PASS, list.size() + " elements were found..");
