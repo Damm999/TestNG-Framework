@@ -2,11 +2,12 @@ package com.driver;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeDriverService;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.GeckoDriverService;
-
 import com.support.Browsers;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class Driver {
 
@@ -24,20 +25,28 @@ public class Driver {
 	}
 
 	public WebDriver getWebdriver(Browsers browser) {
+		try {
 		switch (browser) {
 		case Chrome:
-			System.setProperty(ChromeDriverService.CHROME_DRIVER_EXE_PROPERTY, "./src/test/resources/drivers/chromedriver.exe");
+			WebDriverManager.chromedriver().setup();
 			setDriver(new ChromeDriver());
 			break;
 		case FireFox:
-			System.setProperty(GeckoDriverService.GECKO_DRIVER_EXE_PROPERTY, "./src/test/resources/drivers/geckodriver.exe");
+			WebDriverManager.firefoxdriver().setup();
 			setDriver(new FirefoxDriver());
 			break;
+		case EDGE:
+			WebDriverManager.edgedriver().setup();
+			setDriver(new EdgeDriver());
 		default:
 			break;
 
 		}
-
+		}
+		catch (Exception e) {
+			System.out.println("...........Driver initilization failed......");
+			System.out.print(e.toString());
+		}
 		return getDriver();
 	}
 

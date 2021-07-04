@@ -4,7 +4,7 @@
   <test thread-count="2" name="Test" parallel="classes">
     <classes>
       <class name="com.testing.AppTest2"/>
-      <class name="com.testing.AppTest"/>
+      <!-- <class name="com.testing.AppTest"/> -->
     </classes>
   </test> <!-- Test -->
 </suite> <!-- Suite -->

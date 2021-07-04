@@ -57,7 +57,7 @@ public class AppTest {
 
 	@BeforeMethod
 	public void beforeMethod() {
-		driver = d.getWebdriver(Browsers.Chrome);
+		driver = d.getWebdriver(Browsers.EDGE);
 		LoggersUtils.getLog().info("Test input");
 		sel = new SeleniumUtils(driver, ex);
 		// Page Objects
