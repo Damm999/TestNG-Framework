@@ -15,10 +15,10 @@ RUN apt-get install -y git
 
 
 # Download Chrome Browser
-RUN  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /home
+RUN  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /home/testng-repo
 
 # Install Chrome Browser
-RUN cd /home && sudo apt install ./google-chrome-stable_current_amd64.deb && cd /
+RUN cd /home/testng-repo && sudo apt install ./google-chrome-stable_current_amd64.deb && cd /
 
 # Clone repo
 RUN git clone https://github.com/Damm999/TestNG-Framework.git /home/testng-repo
