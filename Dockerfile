@@ -7,6 +7,9 @@ FROM maven:3.6.0-jdk-11-slim AS build
 RUN apt-get update
 
 # Install software 
+RUN apt-get install -y wget
+
+# Install software 
 RUN apt-get install -y git
 
 # Download Chrome Browser
