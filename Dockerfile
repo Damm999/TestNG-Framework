@@ -15,7 +15,7 @@ RUN apt-get install -y git
 
 
 # Download Chrome Browser
-RUN  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb /home/testng-repo
+RUN  cd /home/testng-repo && wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 
 # Install Chrome Browser
 RUN cd /home/testng-repo && sudo apt install ./google-chrome-stable_current_amd64.deb && cd /
