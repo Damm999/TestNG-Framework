@@ -42,27 +42,3 @@ COPY testNG.xml  /kk-testng-libs/testNG.xml
 
 RUN  ls -lah && mvn clean package
 
-<<<<<<< Updated upstream
-# Install software 
-RUN apt-get install -y wget
-
-# Install software 
-RUN apt-get install -y git
-
-WORKDIR /home/testng-repo
-
-# Download Chrome Browser
-RUN  wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
-
-# Install Chrome Browser
-RUN sudo apt install ./google-chrome-stable_current_amd64.deb
-
-# Clone repo
-RUN git clone https://github.com/Damm999/TestNG-Framework.git
-
-RUN ls -lah
-
-# Run Code
-RUN mvn clean install
-=======
->>>>>>> Stashed changes
