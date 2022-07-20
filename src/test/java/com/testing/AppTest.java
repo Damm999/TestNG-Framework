@@ -3,8 +3,8 @@ package com.testing;
 import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
@@ -22,7 +22,6 @@ import com.driver.Driver;
 import com.pageobjects.HomePage;
 import com.pageobjects.MenuPage;
 import com.reporting.ExtentReporting;
-import com.support.Browsers;
 import com.utils.JsonUtils;
 import com.utils.LoggersUtils;
 import com.utils.SeleniumUtils;
@@ -83,8 +82,7 @@ public class AppTest {
 		String menuName = (String) data.get("menu");
 		mp.selectMenu(menuName);
 		String items = (String) data.get("items");
-		ArrayList<String> extras =  (ArrayList<String>) data.get("ExtrasList");
-		mp.selectMenuItems(items, extras);
+		mp.selectMenuItems(items, (List<String>)data.get("ExtrasList"));
 		Assert.assertTrue(true);
 	}
 

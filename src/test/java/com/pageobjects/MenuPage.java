@@ -1,7 +1,6 @@
 package com.pageobjects;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -88,7 +87,7 @@ public class MenuPage {
 		sel.clickElementJS(menuNameLabel(menuName));
 	}
 
-	public void selectMenuItems(String items, ArrayList<String> extras) throws IOException {
+	public void selectMenuItems(String items, List<?> extras) throws IOException {
 
 		sel.waitForElementToBeVisible(driver.findElement(menuItems(items)));
 		sel.clickElement(menuItems(items));

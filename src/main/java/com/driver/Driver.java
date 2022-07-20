@@ -43,11 +43,11 @@ public class Driver {
 			browserName = browserName.toUpperCase();
 			Browsers browser = Browsers.valueOf(browserName);
 			switch (browser) {
-				case Chrome:
+				case CHROME:
 					WebDriverManager.chromedriver().setup();
 					setDriver(new ChromeDriver());
 					break;
-				case FireFox:
+				case FIREFOX:
 					WebDriverManager.firefoxdriver().setup();
 					setDriver(new FirefoxDriver());
 					break;
@@ -60,7 +60,7 @@ public class Driver {
 			}
 		} catch (Exception e) {
 			System.out.println("...........Driver initilization failed......");
-			System.out.print(e.toString());
+			e.printStackTrace();
 		}
 		return getDriver();
 	}

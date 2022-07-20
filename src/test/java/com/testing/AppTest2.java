@@ -19,7 +19,6 @@ import com.driver.Driver;
 import com.pageobjects.HomePage;
 import com.pageobjects.MenuPage;
 import com.reporting.ExtentReporting;
-import com.support.Browsers;
 import com.utils.JsonUtils;
 import com.utils.SeleniumUtils;
 

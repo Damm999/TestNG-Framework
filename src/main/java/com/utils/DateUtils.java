@@ -6,20 +6,12 @@ import java.util.Date;
 
 public class DateUtils {
 
+	/**
+	 * Method to get Time Stamp
+	 * @return
+	 */
 	public static String getTimeStamp() {
-		
-		StringBuffer stringBuffer = new StringBuffer();
-		Date now = new Date();
-
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyMMddHHmmssZ");
-		return simpleDateFormat.format(now, stringBuffer, new FieldPosition(0)).toString();
-		
-		
-		/*
-		 * String pattern = "yyMMddHHmmssZ"; SimpleDateFormat simpleDateFormat = new
-		 * SimpleDateFormat(pattern); return simpleDateFormat.toString();
-		 */
-		
-		
+		String simpleDate = new SimpleDateFormat("yyyyMMddhhmmss").format(new Date());
+		return simpleDate;
 	}
 }

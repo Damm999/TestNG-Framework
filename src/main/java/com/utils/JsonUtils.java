@@ -1,5 +1,6 @@
 package com.utils;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
@@ -12,32 +13,28 @@ public class JsonUtils {
 	private JSONObject configJsonObject;
 	private JSONObject testDataJsonObject;
 
-	
-	/** 
+	/**
 	 * @return JSONObject
 	 */
 	public JSONObject getConfigJsonObject() {
 		return configJsonObject;
 	}
 
-	
-	/** 
+	/**
 	 * @param configJsonObject
 	 */
 	public void setConfigJsonObject(JSONObject configJsonObject) {
 		this.configJsonObject = configJsonObject;
 	}
 
-	
-	/** 
+	/**
 	 * @return JSONObject
 	 */
 	public JSONObject getTestDataJsonObject() {
 		return testDataJsonObject;
 	}
 
-	
-	/** 
+	/**
 	 * @param testDataJsonObject
 	 */
 	public void setTestDataJsonObject(JSONObject testDataJsonObject) {
@@ -46,6 +43,7 @@ public class JsonUtils {
 
 	/**
 	 * Constructor
+	 * 
 	 * @param testDataName
 	 */
 	public JsonUtils(String testDataName) {
@@ -59,20 +57,20 @@ public class JsonUtils {
 	private void readConfig() {
 		JSONParser parser = new JSONParser();
 		try {
-			Object obj = parser.parse(new FileReader("Config.json"));
- 
-			// A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
+			Object obj = parser.parse(new FileReader("config.json"));
+
+			// A JSON object. Key value pairs are unordered. JSONObject supports
+			// java.util.Map interface.
 			JSONObject jsonObject = (JSONObject) obj;
 			setConfigJsonObject(jsonObject);
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
-	
-	/** 
+	/**
 	 * @param name
 	 * @return String
 	 */
@@ -80,22 +78,25 @@ public class JsonUtils {
 		return getConfigJsonObject().get(name).toString();
 	}
 
-	
-	/** 
+	/**
 	 * @param testDataName
 	 * @return JSONObject
 	 */
-	private void readTestData(String testDataName)  {
-		JSONParser parser = new JSONParser(); 
-		try { 
-			JSONObject testDataObj = (JSONObject) parser.parse(new FileReader("./src/test/resources/Test_Data/"+testDataName+".json"));
+	private void readTestData(String testDataName) {
+		JSONParser parser = new JSONParser();
+		String path = "./src/test/resources/Test_Data/" + testDataName + ".json";
+		try {
+			JSONObject testDataObj = (JSONObject) parser
+					.parse(new FileReader(path));
 			setTestDataJsonObject(testDataObj);
-		}catch (IOException io) {
-			System.err.println("Error while opening file");
-			io.printStackTrace();
+		} catch (FileNotFoundException fileNotFoundException) {
+			System.out.println("Please create test data file for: " + testDataName + " to use JSON Utilities");
 		} catch (ParseException ps) {
 			System.err.println("Error while Parsing json  file");
 			ps.printStackTrace();
+		} catch (IOException e) {
+			System.out.println("Issue with reading file");
+			e.printStackTrace();
 		}
 	}
 }

@@ -1,5 +1,5 @@
 package com.support;
 
 public enum Browsers {
-	Chrome, FireFox, EDGE
+	CHROME, FIREFOX, EDGE
 }
