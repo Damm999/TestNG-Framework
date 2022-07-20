@@ -48,7 +48,7 @@ public class AppTest2 {
 
 	@BeforeMethod
 	public void beforeMethod() {
-		driver = d.getWebdriver(Browsers.EDGE);
+		driver = d.getWebdriver(jsonData.getConfigData("browser"));
 		browserName = ((RemoteWebDriver) driver).getCapabilities().getBrowserName().toLowerCase();
 		sel = new SeleniumUtils(driver, ex);
 		// Page Objects

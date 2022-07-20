@@ -3,7 +3,7 @@ package com.utils;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+import java.time.Duration;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
@@ -26,8 +26,8 @@ public class SeleniumUtils {
 	public SeleniumUtils(WebDriver driver, ExtentReporting extent) {
 		this.driver = driver;
 		ex = extent;
-		wait = new WebDriverWait(driver, 20);
-		this.driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		wait = new WebDriverWait(driver, Duration.ofMinutes(2));
+		this.driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 		je = (JavascriptExecutor) driver;
 	}
 

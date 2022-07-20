@@ -3,3 +3,4 @@ reports
 screenshots
 log
 target/**
+/target/

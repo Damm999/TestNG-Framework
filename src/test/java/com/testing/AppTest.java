@@ -6,6 +6,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 
+import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 import org.testng.ITestResult;
@@ -57,7 +58,7 @@ public class AppTest {
 
 	@BeforeMethod
 	public void beforeMethod() {
-		driver = d.getWebdriver(Browsers.EDGE);
+		driver = d.getWebdriver(jsonData.getConfigData("browser"));
 		LoggersUtils.getLog().info("Test input");
 		sel = new SeleniumUtils(driver, ex);
 		// Page Objects
@@ -70,20 +71,19 @@ public class AppTest {
 
 	@Test
 	public void TC_001() throws Exception {
+		JSONObject data = jsonData.getTestDataJsonObject();
 		ex.createTestCase("ClubKitchen TC001");
 		
 		ex.logTestSteps(Status.INFO, "Sucessfully opened the website");
 		hp.navigateToMenusPage();
 
-		String streetAddress = "Seidengasse 44, 1070 Wien, Austria";
+		String streetAddress = (String) data.get("streetAddress");
 		mp.verifyMenuPage();
 		mp.enterStreetAddress(streetAddress);
-		String menuName = "Mamacita's Burrito Menu";
+		String menuName = (String) data.get("menu");
 		mp.selectMenu(menuName);
-		String items = "Wicked Classic Burrito";
-		ArrayList<String> extras = new ArrayList<String>();
-		extras.add("Tomaten Avocado Salsa");
-		extras.add("Extra Cheeeese");
+		String items = (String) data.get("items");
+		ArrayList<String> extras =  (ArrayList<String>) data.get("ExtrasList");
 		mp.selectMenuItems(items, extras);
 		Assert.assertTrue(true);
 	}

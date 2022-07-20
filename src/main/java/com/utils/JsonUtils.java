@@ -1,39 +1,69 @@
 package com.utils;
 
 import java.io.FileReader;
-import java.util.HashMap;
-import java.util.Iterator;
+import java.io.IOException;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class JsonUtils {
 
-	HashMap<String, String> testData;
-	JSONObject json ;
+	private JSONObject configJsonObject;
+	private JSONObject testDataJsonObject;
 
-	public JSONObject getJson() {
-		return json;
+	
+	/** 
+	 * @return JSONObject
+	 */
+	public JSONObject getConfigJsonObject() {
+		return configJsonObject;
 	}
 
-	public void setJson(JSONObject json) {
-		this.json = json;
+	
+	/** 
+	 * @param configJsonObject
+	 */
+	public void setConfigJsonObject(JSONObject configJsonObject) {
+		this.configJsonObject = configJsonObject;
 	}
 
+	
+	/** 
+	 * @return JSONObject
+	 */
+	public JSONObject getTestDataJsonObject() {
+		return testDataJsonObject;
+	}
+
+	
+	/** 
+	 * @param testDataJsonObject
+	 */
+	public void setTestDataJsonObject(JSONObject testDataJsonObject) {
+		this.testDataJsonObject = testDataJsonObject;
+	}
+
+	/**
+	 * Constructor
+	 * @param testDataName
+	 */
 	public JsonUtils(String testDataName) {
 		readConfig();
 		readTestData(testDataName);
 	}
 
-	public void readConfig() {
+	/**
+	 * Read Execution Config
+	 */
+	private void readConfig() {
 		JSONParser parser = new JSONParser();
 		try {
 			Object obj = parser.parse(new FileReader("Config.json"));
  
 			// A JSON object. Key value pairs are unordered. JSONObject supports java.util.Map interface.
 			JSONObject jsonObject = (JSONObject) obj;
-			setJson(jsonObject);
+			setConfigJsonObject(jsonObject);
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -41,22 +71,31 @@ public class JsonUtils {
 
 	}
 
+	
+	/** 
+	 * @param name
+	 * @return String
+	 */
 	public String getConfigData(String name) {
-		return getJson().get(name).toString();
+		return getConfigJsonObject().get(name).toString();
 	}
 
-	public void readTestData(String testDataName) {
-		/*
-		 * JSONParser parser = new JSONParser(); try { Object obj = parser.parse(new
-		 * FileReader("./src/test/resources/Test_Data/"+testDataName+".json"));
-		 * 
-		 * // A JSON object. Key value pairs are unordered. JSONObject supports
-		 * java.util.Map interface. JSONObject jsonObject = (JSONObject) obj;
-		 * setJson(jsonObject); JSONArray companyList = (JSONArray)
-		 * jsonObject.get("itemsList"); System.out.println(companyList.get(1));
-		 * Iterator<JSONObject> iterator = companyList.iterator(); while
-		 * (iterator.hasNext()) { System.out.println(iterator.next()); } } catch
-		 * (Exception e) { e.printStackTrace(); }
-		 */
+	
+	/** 
+	 * @param testDataName
+	 * @return JSONObject
+	 */
+	private void readTestData(String testDataName)  {
+		JSONParser parser = new JSONParser(); 
+		try { 
+			JSONObject testDataObj = (JSONObject) parser.parse(new FileReader("./src/test/resources/Test_Data/"+testDataName+".json"));
+			setTestDataJsonObject(testDataObj);
+		}catch (IOException io) {
+			System.err.println("Error while opening file");
+			io.printStackTrace();
+		} catch (ParseException ps) {
+			System.err.println("Error while Parsing json  file");
+			ps.printStackTrace();
+		}
 	}
 }
