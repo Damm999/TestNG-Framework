@@ -1,3 +1,5 @@
+![example branch parameter](https://github.com/Damm999/TestNG-Framework/actions/workflows/mvn.yml/badge.svg?branch=master)
+
 # Pre-Requisites
 > Before working with this framework, please ensure you have jdk 13 and testNG lib
 
