@@ -1,9 +1,11 @@
 package com.pageobjects;
 
 import java.io.IOException;
+import java.util.List;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindAll;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 
@@ -23,22 +25,17 @@ public class HomePage {
 		PageFactory.initElements(this.driver, this);
 	}
 
-	@FindBy(css = "[class='btn club-home-button shop-menu-btn']")
-	public WebElement menuButton;
+	@FindAll({
+			@FindBy(css = ".category-cards > div")
+	})
+	private List<WebElement> menuOptionsLinks;
 	
-	@FindBy(css = "[class='navigation--entry login-logout']")
-	public WebElement loginButton;
-	
-	@FindBy(css = ".register--login-email > input")
-	public WebElement emailAddressTextBox;
-	
-	
-	public void navigateToMenusPage() throws IOException {
-		sel.clickElement(menuButton);
-	}
-	
-	public void clickOnLogin() throws IOException {
-		sel.clickElement(loginButton);
-		sel.waitForElementToBeVisible(emailAddressTextBox);
+	public void navigateToMenusPage(String menuName) throws IOException {
+		for(WebElement menu : menuOptionsLinks) {
+			if (menu.getText().contains(menuName)) {
+				menu.click();
+				break;
+			}
+		}
 	}
 }

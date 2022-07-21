@@ -60,9 +60,9 @@ public class AppTest2 {
 
 	@Test
 	public void TC_001() throws Exception {
-		ex.createTestCase("ClubKitchen TC001", "Kaushik", "Regression", browserName);
+		ex.createTestCase("Toolsqa Demo site TC001", "Kaushik", "Regression", browserName);
 		ex.logTestSteps(Status.INFO, "Sucessfully opened the website.. and automation is started...");
-		hp.navigateToMenusPage();
+		hp.navigateToMenusPage("Alerts");
 
 		String streetAddress = "Seidengasse 44, 1070 Wien, Austria";
 		mp.verifyMenuPage();
@@ -82,7 +82,7 @@ public class AppTest2 {
 	public void TC_002() throws IOException {
 		ex.createTestCase("ClubKitchen TC002", "Rakesh", "Sanity Suite", browserName);
 		ex.logTestSteps(Status.INFO, "Sucessfully opened 2nd website");
-		hp.clickOnLogin();
+		hp.navigateToMenusPage("Widgets");
 		Assert.assertTrue(true);
 		ex.logTestStepWithScreenshot(driver, Status.WARNING, "Test Excersie 2");
 	}

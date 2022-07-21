@@ -4,8 +4,9 @@ import java.io.IOException;
 import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
+import com.pageobjects.ElementsPage;
+import com.pageobjects.FormsPage;
 import org.json.simple.JSONObject;
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
@@ -32,13 +33,14 @@ import com.utils.SeleniumUtils;
 public class AppTest {
 
 	WebDriver driver;
-	ExtentReporting ex;
+	ExtentReporting extentReporting;
 	JsonUtils jsonData;
-	SeleniumUtils sel;
+	SeleniumUtils seleniumUtils;
 	Driver d;
 	
-	HomePage hp;
-	MenuPage mp;
+	HomePage homePage;
+	ElementsPage elementsPage;
+	FormsPage formsPage;
 
 	@BeforeClass
 	public void beforeClass() {
@@ -52,57 +54,50 @@ public class AppTest {
 		d = new Driver();
 		driver = d.getDriver();
 		LoggersUtils.getInstance(AppTest.class);
-		ex = new ExtentReporting("AppTest");
+		extentReporting = new ExtentReporting("AppTest");
 	}
 
 	@BeforeMethod
 	public void beforeMethod() {
 		driver = d.getWebdriver(jsonData.getConfigData("browser"));
 		LoggersUtils.getLog().info("Test input");
-		sel = new SeleniumUtils(driver, ex);
+		seleniumUtils = new SeleniumUtils(driver, extentReporting);
 		// Page Objects
-		hp = new HomePage(driver, sel, ex);
-		mp = new MenuPage(driver, sel, ex);
+		homePage = new HomePage(driver, seleniumUtils, extentReporting);
+		elementsPage = new ElementsPage(driver, seleniumUtils, extentReporting);
+		formsPage = new FormsPage(driver, seleniumUtils, extentReporting);
 
 		driver.manage().window().maximize();
 		driver.get(jsonData.getConfigData("url"));
 	}
 
-	@Test
+	@Test(description = "Select Elements Menu")
 	public void TC_001() throws Exception {
 		JSONObject data = jsonData.getTestDataJsonObject();
-		ex.createTestCase("ClubKitchen TC001");
+		extentReporting.createTestCase("Tools QA TC001");
 		
-		ex.logTestSteps(Status.INFO, "Sucessfully opened the website");
-		hp.navigateToMenusPage();
-
-		String streetAddress = (String) data.get("streetAddress");
-		mp.verifyMenuPage();
-		mp.enterStreetAddress(streetAddress);
-		String menuName = (String) data.get("menu");
-		mp.selectMenu(menuName);
-		String items = (String) data.get("items");
-		mp.selectMenuItems(items, (List<String>)data.get("ExtrasList"));
-		Assert.assertTrue(true);
+		extentReporting.logTestSteps(Status.INFO, "Sucessfully opened the website");
+		homePage.navigateToMenusPage("Elements");
+		Assert.assertTrue(elementsPage.validateHeader());
 	}
 
 	@Test
 	public void TC_002() throws IOException {
-		ex.createTestCase("ClubKitchen TC002");
-		ex.logTestSteps(Status.PASS, "Sucessfully opened 2nd website");
-		hp.clickOnLogin();
-		Assert.assertTrue(true);
-		ex.logTestStepWithScreenshot(driver, Status.WARNING, "Test Excersie");
+		extentReporting.createTestCase("Open Forms Link TC002");
+		extentReporting.logTestSteps(Status.PASS, "Sucessfully opened 2nd website");
+		homePage.navigateToMenusPage("Forms");
+		Assert.assertTrue(formsPage.validateHeader());
+		extentReporting.logTestStepWithScreenshot(driver, Status.WARNING, "Test Excersie");
 	}
 
 	@AfterMethod
 	public void endDriver(ITestResult res, Method m) throws IOException {
 		
 		if(ITestResult.FAILURE == res.getStatus())
-			ex.logTestStepWithScreenshot(driver, Status.FAIL, m.getName()+" case failed due to:\n"+ res.getThrowable());
+			extentReporting.logTestStepWithScreenshot(driver, Status.FAIL, m.getName()+" case failed due to:\n"+ res.getThrowable());
 		else if(ITestResult.SKIP == res.getStatus())
-			ex.logTestStepWithScreenshot(driver, Status.SKIP, m.getName()+" case Skipped due to: \n"+ res.getThrowable());
-		ex.closeTest();
+			extentReporting.logTestStepWithScreenshot(driver, Status.SKIP, m.getName()+" case Skipped due to: \n"+ res.getThrowable());
+		extentReporting.closeTest();
 		driver.close();
 	}
 

@@ -120,10 +120,10 @@ public class SeleniumUtils {
 		je.executeScript("window.scrollBy(0,250)", "");
 	}
 
-	public List<WebElement> getListOfElements(By ele) throws IOException {
+	public List<WebElement> getListOfElements(By byElement) throws IOException {
 		List<WebElement> list = new ArrayList<WebElement>();
 		try {
-			list = driver.findElements(ele);
+			list = driver.findElements(byElement);
 
 			if (list.isEmpty())
 				ex.logTestSteps(Status.FAIL, "No elements were found.");

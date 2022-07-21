@@ -5,3 +5,5 @@ log
 target/**
 /target/
 .vscode
+# Default ignored files
+.idea
